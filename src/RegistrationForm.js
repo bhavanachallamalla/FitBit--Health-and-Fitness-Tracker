@@ -6,7 +6,8 @@ const RegistrationForm = () => {
   const [formData, setFormData] = useState({
     username: '',
     email: '',
-    password: ''
+    password: '',
+    mobileNumber: '',
   });
 
   const handleChange = (e) => {
@@ -42,6 +43,15 @@ const RegistrationForm = () => {
         />
       </label>
       <label>
+        Mobile Number:
+        <input
+          type="tel"  
+          name="mobileNumber"
+          value={formData.mobileNumber}
+          onChange={handleChange}
+        />
+      </label>
+      <label>
         Password:
         <input
           type="password"
@@ -50,7 +60,7 @@ const RegistrationForm = () => {
           onChange={handleChange}
         />
       </label>
-      <button type="submit">Submit</button>
+      <button type="Register">Register</button>
     </form>
   );
 };
