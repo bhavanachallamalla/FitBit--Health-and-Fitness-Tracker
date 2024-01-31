@@ -3,7 +3,7 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
-      - jenkins # Adjust this according to your branch name
+      - master # Adjust this according to your branch name
 
 jobs:
   deploy:
@@ -23,7 +23,7 @@ jobs:
           # Deploy to GitHub Pages
           git config --global user.name "bhavanachallamalla"
           git config --global user.email "bhavanasri.challamalla@sasi.ac.in"
-          git checkout jenkins  # Assuming gh-pages branch for deployment
+          git checkout master  # Assuming gh-pages branch for deployment
           git add .
           git commit -m "Deploy website"
-          git push origin jenkins
+          git push origin master
