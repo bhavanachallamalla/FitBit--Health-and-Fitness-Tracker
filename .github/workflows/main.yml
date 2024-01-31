@@ -1,0 +1,29 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - jenkins # Adjust this according to your branch name
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Build and deploy
+        run: |
+          # Add commands to build your website here
+          # For example, if it's a static site:
+          npm install  # Or any other build commands
+          npm run build
+
+          # Deploy to GitHub Pages
+          git config --global user.name "bhavanachallamalla"
+          git config --global user.email "bhavanasri.challamalla@sasi.ac.in"
+          git checkout jenkins  # Assuming gh-pages branch for deployment
+          git add .
+          git commit -m "Deploy website"
+          git push origin jenkins
