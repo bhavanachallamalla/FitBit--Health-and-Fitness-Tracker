@@ -3,27 +3,29 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
-      - master # Adjust this according to your branch name
+      - main  # Change this to your main branch name
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest  # Use windows-latest instead of ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout code
         uses: actions/checkout@v2
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v2  # Set up Node.js environment
+        with:
+          node-version: '14'  # Specify Node.js version
 
-      - name: Build and deploy
-        run: |
-          # Add commands to build your website here
-          # For example, if it's a static site:
-          npm install  # Or any other build commands
-          npm run build
+      - name: Install dependencies
+        run: npm install
 
-          # Deploy to GitHub Pages
-          git config --global user.name "bhavanachallamalla"
-          git config --global user.email "bhavanasri.challamalla@sasi.ac.in"
-          git checkout master  # Assuming gh-pages branch for deployment
-          git add .
-          git commit -m "Deploy website"
-          git push origin master
+      - name: Build
+        run: npm run build
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.TOKEN }}
+          publish_dir: ./build
